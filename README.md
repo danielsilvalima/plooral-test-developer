@@ -18,12 +18,6 @@
 - `DELETE /job/:job_id`: Delete a job posting draft.
 - `PUT /job/:job_id/archive`: Archive an active job posting.
 
-### Extra Feature
-
-- **Job Moderation**: using artificial intelligence, we need to moderate the job content before allowing it to be published, to check for potential harmful content.
-Every time a user requests a job publication (`PUT /job/:job_id/publish`), the API should reply with success to the user, but the job should not be immediately published. It should be queued using AWS SQS, feeding the job to a Lambda component.
-Using OpenAI's free moderation API, create a Lambda component that will evaluate the job title and description, and test for hamrful content. If the content passes the evaluation, the component should change the job status to `published`, otherwise change to `rejected` and add the response from OpenAI API to the `notes` column.
-
 ### Bonus Questions
 
 An alternative for system scalability would be to use cron (Linux) to execute a JS file.
